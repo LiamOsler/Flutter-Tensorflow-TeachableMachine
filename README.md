@@ -1,4 +1,6 @@
-# Lobster Detection Mobile Application - CSCIX691 Summer 2021 - Dalhousie University
+# Flutter-Tensorflow-TeachableMachine
+
+CSCIX691 Summer 2021 - Dalhousie University
 
 ![Team Logo](assets/icons/main.svg)
 
