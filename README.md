@@ -38,67 +38,10 @@
 
 Flutter application implementing TFlite for machine vision recognition of lobsters.
 
-### Goal of Project <a name="goal"></a>
+### Goal <a name="goal"></a>
 
-Perform real time object recognition/detection of whether there is a lobster in the camera view, in a generally accessible and aesthetically pleasing app. Develop the app with the multi-platform application development environment Flutter, allowing it to be run on Android and iOS devices.
+Demonstrates the basic setup of Flutter application development setup, scraping image data from Flickr, and training a Tensorflow model with Google's Teachable Machine, and explores Tensorflow model training in R.
 
-### Proposed Solution:
-
-- Collect a proper dataset of lobster photos.
-- Label Images in CVAT or Roboflow Annotate.
-- ~~Export annotated data set to Darknet YOLOv4.~~ Not implemented, teachablemachine.withgoogle.com tensorflow training process was used instead.
-- ~~Run dataset through Roboflow training module.~~ Roboflow's training features require payment, where as teachable machine is free.
-- ~~Export our trained images and bounding boxes in the YOLO Darknet format, using Roboflow.~~ Export format ended up being different that YOLO.
-- ~~Convert YOLOv4 to TFlite’s weighted system.~~
-- Write code to sort data from the API.
-- ~~Convert Darknet Model to TensorFlow Lite.~~ Dartket was not implemented.
-- Deploy on Device.
-
-### Purpose <a name="purpose"></a>
-
-Real time object recognition has a wide variety of applications in both science and industry. An application such as the one developed by the group could conceivably exntended and used by scientists or researchers to perform real-time analysis of the behaviour, location, and population of lobsters in either a wild or contained setting. The aquaculture industry has uses for machine vision in machinery used processing facilities for picking and sorting lobsters from bycatch.
-
-### Intended Users <a name="intendedUsers"></a>
-
-The intended userbase of the Lobster Detection app are the general users who are looking to identify lobsters with their phone. The app has real time object detection which can be used by scientists and researchers to perform real time analysis. The general users can point their camera on the object to check if the object is lobster or not. The users can also detect varities of lobsters.
-
-## User Stories <a name="userStories"> </a>
-
-| ID  |                                               Description                                                |   Status |
-| :-- | :------------------------------------------------------------------------------------------------------: | -------: |
-| 1   |       As a User, I want to create add feedback for the app so that the app can have more accuracy        | Approved |
-| 2   |         As a User, I would like the app to successfully capture the lobster and define its type          | Approved |
-| 3   |   As a User, it would be easier for the app to capture the lobster through my phone with the flash on    | Approved |
-| 4   |       As a User, I would like to have a page in the app for a personal feedback about my app usage       | Approved |
-| 5   | As a User, I would like the app to have a contact information where I could send inquiries about the app | Approved |
-| 6   |                 As a User, I want a page where I could find descriptions about app usage                 | Approved |
-
-### Project Value <a name="projectValue"> </a>
-
-Working on this project have provided significant value to the team as a developer and as a student. Through out the project the development team have used several tools which required consistent learning of new concepts in order to implement. Once the basic development was completed, the iterative development helped the team to promote constant learning and improvement. Moreover, the team have used Azure Board and Git to be organized throughout the project. The team have learned about collaborative work environment and team dynamics as they maybe used in industry.
-
-### Measureable Organizational Value <a name ="measurableOrganizationalValue"> </a>
-
-Within 3 months, the team have successfully developed a working app that is able to detect lobsters with significant accuracy. If more time is provided for the project the team can definitely increase the accuracy for the lobster detection model. The feedback from the users can also provide insight into the user experience for using the app, which can be used to measure the success of the app.
-
-## User Features <a name="userFeatures"> </a>
-
-User Features
-
-Welcome Screen
-
-Here, users see a message conveying the purpose of the application and a Button that allows transition to the next Screen.
-
-HomePage Screen
-
-Here, users have a choice between two options for detection:
-
-- Using the camera for detection.
-- Performing detection on a static image. This feature is not currently complete, as the application selects an image from the library and but performs no detection on it.
-
-Detection Screen
-
-Here, the appliation runs an object detection model and displays the type of lobster detected along with the percentage of accuracy.
 
 ## Setup <a name="setup"> </a>
 
@@ -145,111 +88,7 @@ You will find that the project has a directory and file structure like this:
 application_folder
 ├── README.md <-- 'The main README.md file'
 ├── android <-- 'The compiled android application folder'
-│   ├── app
-│   │   ├── build.gradle
-│   │   └── src
-│   │       ├── debug
-│   │       │   └── AndroidManifest.xml
-│   │       ├── main
-│   │       │   ├── AndroidManifest.xml
-│   │       │   ├── java
-│   │       │   │   └── io
-│   │       │   │       └── flutter
-│   │       │   │           └── plugins
-│   │       │   │               └── GeneratedPluginRegistrant.java
-│   │       │   ├── kotlin
-│   │       │   │   └── com
-│   │       │   │       └── umairadil
-│   │       │   │           └── tensorflow_lite_flutter
-│   │       │   │               └── MainActivity.kt
-│   │       │   └── res
-│   │       │       ├── drawable
-│   │       │       │   └── launch_background.xml
-│   │       │       ├── mipmap-hdpi
-│   │       │       │   └── ic_launcher.png
-│   │       │       ├── mipmap-mdpi
-│   │       │       │   └── ic_launcher.png
-│   │       │       ├── mipmap-xhdpi
-│   │       │       │   └── ic_launcher.png
-│   │       │       ├── mipmap-xxhdpi
-│   │       │       │   └── ic_launcher.png
-│   │       │       ├── mipmap-xxxhdpi
-│   │       │       │   └── ic_launcher.png
-│   │       │       └── values
-│   │       │           └── styles.xml
-│   │       └── profile
-│   │           └── AndroidManifest.xml
-│   ├── build.gradle
-│   ├── gradle
-│   │   └── wrapper
-│   │       └── gradle-wrapper.properties
-│   ├── gradle.properties
-│   ├── local.properties
-│   └── settings.gradle
-├── assets  <-- 'The folder where assets are stored'
-│   ├── icons
-│   │   ├── 128.png
-│   │   ├── 256.png
-│   │   ├── 64.png
-│   │   └── lobster_transparent.svg <-- 'The source file for the icon'
-│   ├── labels.txt <-- 'The annotation labels for the tflite model file'
-│   └── model_unquant.tflite <-- 'tflite model file'
-├── ios <-- 'The compiled iOS application folder'
-│   ├── Flutter
-│   │   ├── AppFrameworkInfo.plist
-│   │   ├── Debug.xcconfig
-│   │   ├── Generated.xcconfig
-│   │   ├── Release.xcconfig
-│   │   └── flutter_export_environment.sh
-│   ├── Podfile
-│   ├── Runner
-│   │   ├── AppDelegate.swift
-│   │   ├── Assets.xcassets
-│   │   │   ├── AppIcon.appiconset
-│   │   │   │   ├── Contents.json
-│   │   │   │   ├── Icon-App-1024x1024@1x.png
-│   │   │   │   ├── Icon-App-20x20@1x.png
-│   │   │   │   ├── Icon-App-20x20@2x.png
-│   │   │   │   ├── Icon-App-20x20@3x.png
-│   │   │   │   ├── Icon-App-29x29@1x.png
-│   │   │   │   ├── Icon-App-29x29@2x.png
-│   │   │   │   ├── Icon-App-29x29@3x.png
-│   │   │   │   ├── Icon-App-40x40@1x.png
-│   │   │   │   ├── Icon-App-40x40@2x.png
-│   │   │   │   ├── Icon-App-40x40@3x.png
-│   │   │   │   ├── Icon-App-60x60@2x.png
-│   │   │   │   ├── Icon-App-60x60@3x.png
-│   │   │   │   ├── Icon-App-76x76@1x.png
-│   │   │   │   ├── Icon-App-76x76@2x.png
-│   │   │   │   └── Icon-App-83.5x83.5@2x.png
-│   │   │   └── LaunchImage.imageset
-│   │   │       ├── Contents.json
-│   │   │       ├── LaunchImage.png
-│   │   │       ├── LaunchImage@2x.png
-│   │   │       ├── LaunchImage@3x.png
-│   │   │       └── README.md
-│   │   ├── Base.lproj
-│   │   │   ├── LaunchScreen.storyboard
-│   │   │   └── Main.storyboard
-│   │   ├── GeneratedPluginRegistrant.h
-│   │   ├── GeneratedPluginRegistrant.m
-│   │   ├── Info.plist
-│   │   └── Runner-Bridging-Header.h
-│   ├── Runner.xcodeproj
-│   │   ├── project.pbxproj
-│   │   ├── project.xcworkspace
-│   │   │   ├── contents.xcworkspacedata
-│   │   │   └── xcshareddata
-│   │   │       ├── IDEWorkspaceChecks.plist
-│   │   │       └── WorkspaceSettings.xcsettings
-│   │   └── xcshareddata
-│   │       └── xcschemes
-│   │           └── Runner.xcscheme
-│   └── Runner.xcworkspace
-│       ├── contents.xcworkspacedata
-│       └── xcshareddata
-│           ├── IDEWorkspaceChecks.plist
-│           └── WorkspaceSettings.xcsettings
+...
 ├── lib <-- 'Where most of the code resides, this is the project library'
 │   ├── HomePage.dart <-- 'The primary place of interaction with the user'
 │   ├── SplashScreen.dart <-- 'A splash screen that shows the group local'
@@ -975,10 +814,10 @@ Perform optional augmentation steps:
 ![](assets/roboflow-setup/setup20.png)
 ![](assets/roboflow-setup/setup21.png)
 
-### This project is based on:
+### Flutter application
 
+The basis of the code for the Flutter application can be found here
 https://github.com/umair13adil/tensorflow_lite_flutter
-
 By Muhammad Umair Adil (https://github.com/umair13adil)
 
 ![](assets/external-sources/image1.gif)
